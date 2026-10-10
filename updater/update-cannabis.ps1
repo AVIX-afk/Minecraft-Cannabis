@@ -5,6 +5,10 @@
   older (or missing), downloads the new jar, checks it, and swaps it in. The old jar is kept in a
   "cannabis-backup" folder next to the mods folder, not deleted.
 
+  Every official jar is signed by the mod's author. The updater only installs a jar whose signature
+  matches the key below, so a jar that didn't come from the author is refused, even if it was
+  uploaded to the official page.
+
   Which mods folder:
     * -ModsDir "<path>"                     if given (e.g. a server's mods folder)
     * the "mods" folder next to this script  if there is one (put the updater in a server folder)
@@ -26,6 +30,9 @@ param(
 # --------------------------------------------------------------------------- settings
 # The GitHub repository the mod is published from: "owner/name".
 $Repo = "AVIX-afk/Minecraft-Cannabis"
+# The author's public signing key (RSA, SHA-256). Releases are signed with the matching private key.
+$SigningKeyModulus = "q1Cd+setSeeR3RC8iNKtueJjb/ReYoNqW5+7D5MTrHJJn54XH//XnPo27/jcb1Wp54vT9kKinHdxjfN4+tXzVLiQ6/82J2ICfu6NSD6LI4+XnstkMIp85YNNUUkhwj7jkJ6JgbOR5QDGcPXjLtJNC++8RqnQC0WarvHq2ozpNBmPuD6hFgDA0yRCxSTJLE0wocFI6K7byIc6eIVAlFoeUGcpSOA6HqL/Sr7MRuItYHU2Ws9Uc78bzltR7cBBGsLJLktHT2IRbexpfHaQ5SBHyPi8iCsCBu/Q6yCiVwEoK/qpIBYeE6+ijKU3xO7GjYogYM0qAKvvzMgSj5AWpc9UME22S7tAmu44YgSFz4mAvCjVy4uUFkZ/TpDkO165Qs2QCrqUNuZMfWGFCY7tBxwSBSqYChh0VlDijA+7a3BOgp/Sjv9Cu6X8etsM75V18+J7OngrE8h3NG6NMk640K8DZ8R5uIWXP5jyifcQ2VfKAZpfyZYIjNnVgdXtlP5A01EJ"
+$SigningKeyExponent = "AQAB"
 # --------------------------------------------------------------------------- end of settings
 
 $ErrorActionPreference = "Stop"
@@ -57,6 +64,22 @@ function Read-ModInfo([string]$jar) {
             try { return ($reader.ReadToEnd() | ConvertFrom-Json) } finally { $reader.Dispose() }
         } finally { $zip.Dispose() }
     } catch { return $null }
+}
+
+# True if $sigText is the author's signature of the file $file.
+function Test-Signature([string]$file, [string]$sigText) {
+    try {
+        $sig = [Convert]::FromBase64String(($sigText -replace '\s', ''))
+        $key = New-Object System.Security.Cryptography.RSAParameters
+        $key.Modulus = [Convert]::FromBase64String($SigningKeyModulus)
+        $key.Exponent = [Convert]::FromBase64String($SigningKeyExponent)
+        $rsa = [System.Security.Cryptography.RSA]::Create()
+        try {
+            $rsa.ImportParameters($key)
+            return $rsa.VerifyData([System.IO.File]::ReadAllBytes($file), $sig,
+                [System.Security.Cryptography.HashAlgorithmName]::SHA256, [System.Security.Cryptography.RSASignaturePadding]::Pkcs1)
+        } finally { $rsa.Dispose() }
+    } catch { return $false }
 }
 
 function To-Version([string]$text) {
@@ -115,6 +138,7 @@ if ($null -eq $latest -or $null -eq $asset) {
     Say "The latest GitHub release ($($release.tag_name)) has no mod jar attached. Nothing was changed." "Red"
     Finish 1
 }
+$sigAsset = $release.assets | Where-Object { $_.name -eq "$($asset.name).sig" } | Select-Object -First 1
 Say ("Latest:    {0} (released {1})" -f $latest, ([datetime]$release.published_at).ToString("yyyy-MM-dd"))
 
 $newest = $installed | Where-Object { $null -ne $_.Version } | Sort-Object Version -Descending | Select-Object -First 1
@@ -129,7 +153,9 @@ if ($CheckOnly) {
 
 # ---- 4. download to a temporary file and check it before touching the mods folder
 $temp = Join-Path ([System.IO.Path]::GetTempPath()) ("cannabis-update-" + [guid]::NewGuid().ToString("N") + ".jar")
+$tempSig = "$temp.sig"
 try {
+    if ($null -eq $sigAsset -or $sigAsset.size -gt 4096) { throw "this release has no signature from the mod's author, so it can't be trusted" }
     Say "Downloading $($asset.name)..."
     Invoke-WebRequest -UseBasicParsing -Uri $asset.browser_download_url -OutFile $temp -Headers @{ "User-Agent" = "cannabis-mod-updater" }
     if ($asset.size -and (Get-Item -LiteralPath $temp).Length -ne [long]$asset.size) { throw "the download is incomplete" }
@@ -137,11 +163,18 @@ try {
         $hash = (Get-FileHash -LiteralPath $temp -Algorithm SHA256).Hash
         if ($hash -ne $Matches.hash.ToUpper()) { throw "the download's checksum doesn't match GitHub's" }
     }
+    Invoke-WebRequest -UseBasicParsing -Uri $sigAsset.browser_download_url -OutFile $tempSig -Headers @{ "User-Agent" = "cannabis-mod-updater" }
+    if ((Get-Item -LiteralPath $tempSig).Length -gt 4096 -or -not (Test-Signature $temp ([System.IO.File]::ReadAllText($tempSig)))) {
+        throw "the download isn't signed by the mod's author, so it wasn't installed. Please report this on the official page"
+    }
     $newInfo = Read-ModInfo $temp
     if ($null -eq $newInfo -or $newInfo.id -ne $ModId) { throw "the downloaded file isn't the Cannabis mod" }
+    if ((To-Version $newInfo.version) -ne $latest) { throw "the downloaded jar is version $($newInfo.version), not $latest" }
+    Remove-Item -LiteralPath $tempSig -ErrorAction SilentlyContinue
 } catch {
     Remove-Item -LiteralPath $temp -ErrorAction SilentlyContinue
-    Say "Download failed: $($_.Exception.Message). Nothing was changed." "Red"
+    Remove-Item -LiteralPath $tempSig -ErrorAction SilentlyContinue
+    Say "Update stopped: $($_.Exception.Message). Nothing was changed." "Red"
     Finish 1
 }
 

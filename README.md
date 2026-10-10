@@ -65,6 +65,7 @@ Put Canna-Butter in a furnace's fuel slot and cook ready-to-eat food: bread, ste
 * **Smoke and sound:** a haze of smoke and an exhale plume, plus a lighter click, crackle, bubbling, inhale and exhale. All the sounds are Minecraft's own.
 * **Selling buds:** Wandering Traders buy buds for emeralds.
 * **Server-friendly:** everything runs on the server, and the mod sends no custom network packets. Seed rarity is configurable.
+* **Update notices:** when a new version is out, the game tells you on start-up. It only reads the newest version number from this page and never downloads anything itself.
 
 The full rules, numbers and recipes are in the **[player guide](docs/GUIDE.md)**.
 
@@ -84,15 +85,18 @@ The full rules, numbers and recipes are in the **[player guide](docs/GUIDE.md)**
 3. Put both jars into your `mods` folder (`%APPDATA%\.minecraft\mods` on Windows). Delete any older `cannabis-*.jar` first.
 4. Start the game with the Fabric profile.
 
-**Official downloads only come from this page's [Releases](../../releases).** Each release lists SHA-256 checksums in `SHA256SUMS.txt`; see [SECURITY.md](SECURITY.md).
+**Official downloads only come from this page's [Releases](../../releases).** Each release lists SHA-256 checksums in `SHA256SUMS.txt`, and every jar comes with the author's signature (`.sig`); see [SECURITY.md](SECURITY.md).
 
 **Multiplayer:** the mod is required on the server **and** on every player's game, and everyone must run the same version. Worlds, items and planted crops carry over between versions.
 
 ### Staying up to date (Windows)
 
+When a new version is out, the mod tells you on the title screen and in chat. To turn that off, set `"check_for_updates": false` in `config/cannabis.json`.
+
 Every release includes **`cannabis-updater.zip`**. Unzip it anywhere and double-click **`update-cannabis.bat`** whenever there's an update, or just before you play:
 
 * It checks GitHub for the newest version. If yours is older, it downloads it, checks it, and swaps it into your mods folder.
+* Every official jar is **signed by the author**. The updater installs only a correctly signed jar and refuses anything else, even a file uploaded to this page by someone else.
 * Your old jar is moved to a `cannabis-backup` folder, not deleted. If anything goes wrong, nothing is changed.
 * **Servers:** put the two updater files in the server folder, next to `mods`, and run it while the server is stopped.
 * **Prism Launcher and similar:** it can run automatically every time you press Play. See the `README.txt` inside the zip.

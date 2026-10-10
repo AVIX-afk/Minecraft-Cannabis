@@ -16,6 +16,9 @@ Everything the mod adds and how it works. For installing, see the [README](../RE
 
 The bonus-seed chances are set in `config/cannabis.json` on the server (`kush_seed_bonus_chance`, `glue_seed_bonus_chance`, 0 to 1). Edit it and run `/reload`; out-of-range values are clamped.
 
+### Update notices
+When the game or server starts, the mod asks GitHub for the newest version number. If there's a newer version, a notice pops up on the title screen and in chat when you join a world, and the server console says so. To update, close Minecraft (or stop the server) and run `update-cannabis.bat` from the updater zip. The mod itself never downloads anything. To turn the notices off, set `"check_for_updates": false` in that game's or server's `config/cannabis.json`.
+
 ---
 
 ## Items

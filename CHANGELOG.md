@@ -2,6 +2,17 @@
 
 All notable changes to the Cannabis mod. Each version must be installed on the server **and** on every client.
 
+## 1.6.0 (2026-10-10)
+
+**Added**
+- **Update notices.** When the game or a server starts, the mod checks for a newer version. If there is one, a notice appears on the title screen and in chat when you join a world (with a link to what's new), and the server console says so. To update, close Minecraft and run `update-cannabis.bat`. The mod itself never downloads anything. Turn the notices off with `"check_for_updates": false` in `config/cannabis.json`.
+- **Signed releases.** Every jar is now signed by the author, and the updater installs only a correctly signed jar. **Download the new `cannabis-updater.zip` from this release once** and replace your old updater: older updaters still work but don't check signatures.
+
+**Changed**
+- `config/cannabis.json` gets the new `check_for_updates` setting added automatically. Your other settings are kept.
+
+The server and every player need the same version, so update together.
+
 ## 1.5.2 (2026-10-10)
 
 **Changed**

@@ -4,9 +4,11 @@
 # to CHANGELOG.md, and push to main. This workflow then:
 #   1. reads the version from the jar and skips if that version is already released
 #   2. checks the jar (it must be the Cannabis mod, named after its version) and the changelog
-#   3. checks the updater points at this repository and packages it
-#   4. creates the tag vX.Y.Z and the release, with the changelog section as its notes and the jar,
-#      cannabis-updater.zip and SHA256SUMS.txt (checksums of both) attached
+#   3. checks the jar's signature (release/cannabis-X.Y.Z.jar.sig) against updater/release-signing-key.pem,
+#      and that the updater checks downloads against the same key
+#   4. checks the updater points at this repository and packages it
+#   5. creates the tag vX.Y.Z and the release, with the changelog section as its notes and the jar,
+#      its .sig, cannabis-updater.zip and SHA256SUMS.txt (checksums of the jar and the zip) attached
 # It can also be started by hand from the Actions tab ("Run workflow").
 name: Release
 
@@ -66,6 +68,26 @@ jobs:
             echo "SKIP=1" >> "$GITHUB_ENV"
           fi
 
+      - name: Check the jar is signed with the release key
+        if: env.SKIP != '1'
+        run: |
+          if [ ! -f "$JAR.sig" ]; then
+            echo "::error::$JAR.sig is missing. Sign the jar and put the .sig next to it in release/."
+            exit 1
+          fi
+          tr -d '\r\n' < "$JAR.sig" | base64 -d > "$RUNNER_TEMP/jar.sig"
+          if ! openssl dgst -sha256 -verify updater/release-signing-key.pem -signature "$RUNNER_TEMP/jar.sig" "$JAR"; then
+            echo "::error::$JAR.sig is not a signature of $JAR by updater/release-signing-key.pem"
+            exit 1
+          fi
+          # the updater must check against the same key
+          want=$(openssl rsa -pubin -in updater/release-signing-key.pem -modulus -noout | cut -d= -f2)
+          have=$(sed -n 's/^\$SigningKeyModulus = "\([A-Za-z0-9+/=]*\)".*/\1/p' updater/update-cannabis.ps1 | base64 -d | od -An -tx1 -v | tr -d ' \n' | tr a-f A-F)
+          if [ "$want" != "$have" ] || ! grep -q '^\$SigningKeyExponent = "AQAB"' updater/update-cannabis.ps1; then
+            echo "::error::updater/update-cannabis.ps1 doesn't embed the key in updater/release-signing-key.pem"
+            exit 1
+          fi
+
       - name: Package the updater (it must point at this repository)
         if: env.SKIP != '1'
         run: |
@@ -89,6 +111,7 @@ jobs:
           body_path: release-notes.md
           files: |
             ${{ env.JAR }}
+            ${{ env.JAR }}.sig
             cannabis-updater.zip
             SHA256SUMS.txt
           make_latest: true
