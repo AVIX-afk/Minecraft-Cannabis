@@ -25,7 +25,7 @@ param(
 
 # --------------------------------------------------------------------------- settings
 # The GitHub repository the mod is published from: "owner/name".
-$Repo = "OWNER/REPO"
+$Repo = "AVIX-afk/Minecraft-Cannabis"
 # --------------------------------------------------------------------------- end of settings
 
 $ErrorActionPreference = "Stop"
@@ -68,8 +68,8 @@ function To-Version([string]$text) {
 
 Say "Cannabis mod updater" "Green"
 
-if ($Repo -eq "OWNER/REPO") {
-    Say "This updater isn't set up yet: the GitHub repository isn't filled in at the top of update-cannabis.ps1." "Red"
+if ($Repo -notmatch '^[A-Za-z0-9._-]+/[A-Za-z0-9._-]+$') {
+    Say "This updater is damaged: the GitHub repository at the top of update-cannabis.ps1 is missing. Download cannabis-updater.zip again from the official Releases page." "Red"
     Finish 2
 }
 

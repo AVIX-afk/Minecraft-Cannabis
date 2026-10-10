@@ -4,7 +4,7 @@
 # to CHANGELOG.md, and push to main. This workflow then:
 #   1. reads the version from the jar and skips if that version is already released
 #   2. checks the jar (it must be the Cannabis mod, named after its version) and the changelog
-#   3. packages the updater with this repository's name filled in
+#   3. checks the updater points at this repository and packages it
 #   4. creates the tag vX.Y.Z and the release, with the changelog section as its notes and the jar,
 #      cannabis-updater.zip and SHA256SUMS.txt (checksums of both) attached
 # It can also be started by hand from the Actions tab ("Run workflow").
@@ -66,13 +66,15 @@ jobs:
             echo "SKIP=1" >> "$GITHUB_ENV"
           fi
 
-      - name: Package the updater, already pointed at this repository
+      - name: Package the updater (it must point at this repository)
         if: env.SKIP != '1'
         run: |
+          if ! grep -q "^\$Repo = \"${GITHUB_REPOSITORY}\"" updater/update-cannabis.ps1; then
+            echo "::error::updater/update-cannabis.ps1 must set \$Repo = \"${GITHUB_REPOSITORY}\""
+            exit 1
+          fi
           mkdir -p cannabis-updater
-          sed 's#^\$Repo = "OWNER/REPO"#$Repo = "${{ github.repository }}"#' updater/update-cannabis.ps1 > cannabis-updater/update-cannabis.ps1
-          grep -q '^\$Repo = "${{ github.repository }}"' cannabis-updater/update-cannabis.ps1
-          cp updater/update-cannabis.bat updater/README.txt cannabis-updater/
+          cp updater/update-cannabis.ps1 updater/update-cannabis.bat updater/README.txt cannabis-updater/
           zip -j cannabis-updater.zip cannabis-updater/*
           cp "$JAR" .
           sha256sum "$(basename "$JAR")" cannabis-updater.zip > SHA256SUMS.txt
