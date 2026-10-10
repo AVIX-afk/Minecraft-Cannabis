@@ -1,0 +1,92 @@
+# Publishes a release when a new mod jar is pushed to release/.
+#
+# To publish: replace the jar in release/ with the new cannabis-X.Y.Z.jar, add a "## X.Y.Z" section
+# to CHANGELOG.md, and push to main. This workflow then:
+#   1. reads the version from the jar and skips if that version is already released
+#   2. checks the jar (it must be the Cannabis mod, named after its version) and the changelog
+#   3. packages the updater with this repository's name filled in
+#   4. creates the tag vX.Y.Z and the release, with the changelog section as its notes and the jar,
+#      cannabis-updater.zip and SHA256SUMS.txt (checksums of both) attached
+# It can also be started by hand from the Actions tab ("Run workflow").
+name: Release
+
+on:
+  push:
+    branches: [main]
+    paths: ["release/**", "CHANGELOG.md"]
+  workflow_dispatch:
+
+# Nothing by default; the release job alone may write releases.
+permissions: {}
+
+concurrency:
+  group: release
+  cancel-in-progress: false
+
+jobs:
+  release:
+    # Only the official repository publishes releases (not forks or copies).
+    if: github.repository == 'AVIX-afk/Minecraft-Cannabis'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      # Third-party actions are pinned to exact commits, not movable tags.
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          persist-credentials: false
+
+      - name: Check the jar and the changelog
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python3 - <<'PY'
+          import glob, json, os, re, sys, zipfile
+          jars = glob.glob("release/cannabis-*.jar")
+          if len(jars) != 1:
+              sys.exit(f"::error::release/ must hold exactly one cannabis-<version>.jar (found {len(jars)})")
+          info = json.loads(zipfile.ZipFile(jars[0]).read("fabric.mod.json"))
+          version = info["version"]
+          if info.get("id") != "cannabis" or os.path.basename(jars[0]) != f"cannabis-{version}.jar":
+              sys.exit(f"::error::{jars[0]} is not cannabis-{version}.jar of the Cannabis mod")
+          text = open("CHANGELOG.md", encoding="utf-8").read()
+          m = re.search(rf"^## {re.escape(version)}\b.*?$\n(.*?)(?=^## |\Z)", text, re.M | re.S)
+          with open(os.environ["GITHUB_ENV"], "a") as env:
+              env.write(f"VERSION={version}\nJAR={jars[0]}\n")
+          notes = (m.group(1).strip() + "\n\n") if m else ""
+          notes += ("**Install:** Minecraft 26.3 with Fabric Loader and Fabric API. Put the jar in the `mods` folder "
+                    "of the server and of every player, replacing the old `cannabis-*.jar`, or run the updater. "
+                    "Worlds carry over.\n")
+          open("release-notes.md", "w", encoding="utf-8").write(notes)
+          if not m:
+              print(f"::warning::CHANGELOG.md has no '## {version}' section; the release will only have install notes")
+          PY
+          if gh release view "v$(grep '^VERSION=' "$GITHUB_ENV" | tail -1 | cut -d= -f2)" --repo "$GITHUB_REPOSITORY" > /dev/null 2>&1; then
+            echo "::notice title=Nothing to release::This version is already released."
+            echo "SKIP=1" >> "$GITHUB_ENV"
+          fi
+
+      - name: Package the updater, already pointed at this repository
+        if: env.SKIP != '1'
+        run: |
+          mkdir -p cannabis-updater
+          sed 's#^\$Repo = "OWNER/REPO"#$Repo = "${{ github.repository }}"#' updater/update-cannabis.ps1 > cannabis-updater/update-cannabis.ps1
+          grep -q '^\$Repo = "${{ github.repository }}"' cannabis-updater/update-cannabis.ps1
+          cp updater/update-cannabis.bat updater/README.txt cannabis-updater/
+          zip -j cannabis-updater.zip cannabis-updater/*
+          cp "$JAR" .
+          sha256sum "$(basename "$JAR")" cannabis-updater.zip > SHA256SUMS.txt
+          cat SHA256SUMS.txt
+
+      - uses: softprops/action-gh-release@3bb12739c298aeb8a4eeaf626c5b8d85266b0e65 # v2.6.2
+        if: env.SKIP != '1'
+        with:
+          tag_name: v${{ env.VERSION }}
+          target_commitish: ${{ github.sha }}
+          name: Cannabis ${{ env.VERSION }}
+          body_path: release-notes.md
+          files: |
+            ${{ env.JAR }}
+            cannabis-updater.zip
+            SHA256SUMS.txt
+          make_latest: true

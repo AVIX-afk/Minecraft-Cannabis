@@ -1,0 +1,173 @@
+<#
+  Cannabis mod updater.
+
+  Checks the newest release of the Cannabis mod on GitHub and, if the jar in your mods folder is
+  older (or missing), downloads the new jar, checks it, and swaps it in. The old jar is kept in a
+  "cannabis-backup" folder next to the mods folder, not deleted.
+
+  Which mods folder:
+    * -ModsDir "<path>"                     if given (e.g. a server's mods folder)
+    * the "mods" folder next to this script  if there is one (put the updater in a server folder)
+    * otherwise %APPDATA%\.minecraft\mods    (the normal Minecraft launcher)
+
+  Close Minecraft (and stop the server) before running it: Windows won't replace a jar that's in use.
+
+  Usable as a launcher pre-launch command (e.g. Prism Launcher):
+    powershell -NoProfile -ExecutionPolicy Bypass -File "<path>\update-cannabis.ps1" -NoPause
+#>
+param(
+    [string]$ModsDir,
+    [switch]$NoPause,
+    [switch]$CheckOnly,
+    # for testing only: where the release information comes from
+    [string]$ApiBase = "https://api.github.com"
+)
+
+# --------------------------------------------------------------------------- settings
+# The GitHub repository the mod is published from: "owner/name".
+$Repo = "OWNER/REPO"
+# --------------------------------------------------------------------------- end of settings
+
+$ErrorActionPreference = "Stop"
+$ModId = "cannabis"
+
+function Say([string]$text, [string]$color = "Gray") { Write-Host $text -ForegroundColor $color }
+
+function Finish([int]$code) {
+    if (-not $NoPause) {
+        Write-Host ""
+        Read-Host "Press Enter to close" | Out-Null
+    }
+    exit $code
+}
+
+# Windows PowerShell 5.1 defaults to old TLS versions that GitHub refuses.
+try { [Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12 } catch { }
+Add-Type -AssemblyName System.IO.Compression
+Add-Type -AssemblyName System.IO.Compression.FileSystem
+
+# Reads fabric.mod.json out of a jar. Returns $null if the file isn't a readable Fabric mod.
+function Read-ModInfo([string]$jar) {
+    try {
+        $zip = [System.IO.Compression.ZipFile]::OpenRead($jar)
+        try {
+            $entry = $zip.GetEntry("fabric.mod.json")
+            if ($null -eq $entry) { return $null }
+            $reader = New-Object System.IO.StreamReader($entry.Open())
+            try { return ($reader.ReadToEnd() | ConvertFrom-Json) } finally { $reader.Dispose() }
+        } finally { $zip.Dispose() }
+    } catch { return $null }
+}
+
+function To-Version([string]$text) {
+    $clean = ($text -replace '^[vV]', '') -replace '[-+].*$', ''
+    $v = $null
+    if ([version]::TryParse($clean, [ref]$v)) { return $v }
+    return $null
+}
+
+Say "Cannabis mod updater" "Green"
+
+if ($Repo -eq "OWNER/REPO") {
+    Say "This updater isn't set up yet: the GitHub repository isn't filled in at the top of update-cannabis.ps1." "Red"
+    Finish 2
+}
+
+# ---- 1. the mods folder
+if (-not $ModsDir) {
+    $beside = Join-Path $PSScriptRoot "mods"
+    if (Test-Path -LiteralPath $beside -PathType Container) { $ModsDir = $beside }
+    elseif ($env:APPDATA) { $ModsDir = Join-Path $env:APPDATA ".minecraft\mods" }
+}
+if (-not $ModsDir -or -not (Test-Path -LiteralPath $ModsDir -PathType Container)) {
+    Say "Can't find a mods folder ($ModsDir). Install Fabric first, or run with -ModsDir ""<path to mods>""." "Red"
+    Finish 2
+}
+$ModsDir = (Resolve-Path -LiteralPath $ModsDir).Path
+Say "Mods folder: $ModsDir"
+
+# ---- 2. what's installed (by reading each jar, so a renamed jar is still recognised)
+$installed = @()
+foreach ($jar in Get-ChildItem -LiteralPath $ModsDir -Filter *.jar -File) {
+    $info = Read-ModInfo $jar.FullName
+    if ($null -ne $info -and $info.id -eq $ModId) {
+        $installed += [pscustomobject]@{ File = $jar; Version = (To-Version $info.version); Text = $info.version }
+    }
+}
+if ($installed.Count -eq 0) { Say "Installed: none" }
+foreach ($m in $installed) { Say ("Installed: {0} ({1})" -f $m.Text, $m.File.Name) }
+if ($installed.Count -gt 1) { Say "More than one copy of the mod is installed; Minecraft won't start like that. The update will leave just one." "Yellow" }
+$hasFabricApi = @(Get-ChildItem -LiteralPath $ModsDir -Filter "fabric-api*.jar" -File).Count -gt 0
+if (-not $hasFabricApi) { Say "Note: no fabric-api jar found in this folder. The mod needs Fabric API." "Yellow" }
+
+# ---- 3. the newest release on GitHub
+try {
+    $release = Invoke-RestMethod -UseBasicParsing -Uri "$ApiBase/repos/$Repo/releases/latest" `
+        -Headers @{ "User-Agent" = "cannabis-mod-updater"; "Accept" = "application/vnd.github+json" }
+} catch {
+    Say "Couldn't reach GitHub to check for updates: $($_.Exception.Message)" "Red"
+    Say "Check your internet connection and try again. Nothing was changed." "Red"
+    Finish 1
+}
+$latest = To-Version $release.tag_name
+$asset = $release.assets | Where-Object { $_.name -match "^$ModId-[0-9][^/\\]*\.jar$" -and $_.name -notmatch "-sources\.jar$" } | Select-Object -First 1
+if ($null -eq $latest -or $null -eq $asset) {
+    Say "The latest GitHub release ($($release.tag_name)) has no mod jar attached. Nothing was changed." "Red"
+    Finish 1
+}
+Say ("Latest:    {0} (released {1})" -f $latest, ([datetime]$release.published_at).ToString("yyyy-MM-dd"))
+
+$newest = $installed | Where-Object { $null -ne $_.Version } | Sort-Object Version -Descending | Select-Object -First 1
+if ($installed.Count -eq 1 -and $null -ne $newest -and $newest.Version -ge $latest) {
+    Say "You're up to date." "Green"
+    Finish 0
+}
+if ($CheckOnly) {
+    Say "An update is available. Run without -CheckOnly to install it." "Yellow"
+    Finish 0
+}
+
+# ---- 4. download to a temporary file and check it before touching the mods folder
+$temp = Join-Path ([System.IO.Path]::GetTempPath()) ("cannabis-update-" + [guid]::NewGuid().ToString("N") + ".jar")
+try {
+    Say "Downloading $($asset.name)..."
+    Invoke-WebRequest -UseBasicParsing -Uri $asset.browser_download_url -OutFile $temp -Headers @{ "User-Agent" = "cannabis-mod-updater" }
+    if ($asset.size -and (Get-Item -LiteralPath $temp).Length -ne [long]$asset.size) { throw "the download is incomplete" }
+    if ($asset.digest -and $asset.digest -match '^sha256:(?<hash>[0-9a-fA-F]{64})$') {
+        $hash = (Get-FileHash -LiteralPath $temp -Algorithm SHA256).Hash
+        if ($hash -ne $Matches.hash.ToUpper()) { throw "the download's checksum doesn't match GitHub's" }
+    }
+    $newInfo = Read-ModInfo $temp
+    if ($null -eq $newInfo -or $newInfo.id -ne $ModId) { throw "the downloaded file isn't the Cannabis mod" }
+} catch {
+    Remove-Item -LiteralPath $temp -ErrorAction SilentlyContinue
+    Say "Download failed: $($_.Exception.Message). Nothing was changed." "Red"
+    Finish 1
+}
+
+# ---- 5. swap: old jars to the backup folder, new jar in
+$backup = Join-Path (Split-Path -Parent $ModsDir) "cannabis-backup"
+try {
+    if ($installed.Count -gt 0) {
+        New-Item -ItemType Directory -Force -Path $backup | Out-Null
+        Get-ChildItem -LiteralPath $backup -Filter *.jar -File | Remove-Item -Force    # keep only the last version
+        foreach ($m in $installed) { Move-Item -LiteralPath $m.File.FullName -Destination (Join-Path $backup $m.File.Name) -Force }
+    }
+    Move-Item -LiteralPath $temp -Destination (Join-Path $ModsDir $asset.name) -Force
+} catch {
+    Remove-Item -LiteralPath $temp -ErrorAction SilentlyContinue
+    Say "Couldn't replace the mod: $($_.Exception.Message)" "Red"
+    Say "Close Minecraft (and stop the server if it runs from this folder), then run the updater again." "Red"
+    # put back anything already moved
+    foreach ($m in $installed) {
+        $moved = Join-Path $backup $m.File.Name
+        if (-not (Test-Path -LiteralPath $m.File.FullName) -and (Test-Path -LiteralPath $moved)) {
+            Move-Item -LiteralPath $moved -Destination $m.File.FullName -ErrorAction SilentlyContinue
+        }
+    }
+    Finish 1
+}
+
+Say ("Updated to {0}. The old jar is in {1}." -f $latest, $backup) "Green"
+if ($release.html_url) { Say "What's new: $($release.html_url)" }
+Finish 0

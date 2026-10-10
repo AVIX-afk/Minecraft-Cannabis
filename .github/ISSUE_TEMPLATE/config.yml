@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Download the mod
+    url: https://github.com/AVIX-afk/Minecraft-Cannabis/releases/latest
+    about: The latest official release. Only download the mod from this page.
+  - name: Player guide
+    url: https://github.com/AVIX-afk/Minecraft-Cannabis/blob/main/docs/GUIDE.md
+    about: How everything in the mod works.
+  - name: Report a security problem privately
+    url: https://github.com/AVIX-afk/Minecraft-Cannabis/security
+    about: For security problems, please don't open a public issue.
