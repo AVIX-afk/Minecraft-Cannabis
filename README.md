@@ -51,7 +51,7 @@ Every strain has its own seeds, buds, Cooked Buds and Canna-Butter, shown in the
 
 ![Every strain's cookie, Canna-Butter and infused foods](docs/images/edibles.png)
 
-Put Canna-Butter in a furnace's fuel slot and cook ready-to-eat food: bread, steak, pie, stews and more. Each bucket makes eight edibles. Infused food keeps its hunger value, gives one and a half times a joint's time, and is marked with flecks in the strain's colour.
+Put Canna-Butter in a furnace's fuel slot and cook ready-to-eat food: bread, steak, pie, stews and more. Each bucket makes eight edibles. Infused food gives twice the plain food's hunger (with its normal saturation), one and a half times a joint's time, and is marked with flecks in the strain's colour. Edibles can be eaten even on a full hunger bar: you still get the effect, and your hunger never goes past full.
 
 ### And more
 

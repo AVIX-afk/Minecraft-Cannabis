@@ -100,7 +100,8 @@ Hold **Use** (right-click) for **4 seconds** with a **Flint and Steel** anywhere
 * Put **Canna-Butter in the fuel slot** of a furnace, smoker or blast furnace and a **finished food** in the top slot. Each food takes 10 seconds and comes out as its edible version ("Creeper Crunch Steak"), marked with strain-coloured flecks and a small leaf. A Cookie becomes that strain's Cookie ("Creeper Crunch Cookie").
 * **One bucket = 8 edibles**, then the empty Bucket is left in the fuel slot. Butter is only used when a food comes out, so taking food out or swapping it mid-cook costs nothing. A part-used bucket shows a bar and *Foods left* in its tooltip.
 * Works on Bread, Cookies, Pumpkin Pie, Baked Potatoes, cooked meat and fish, Mushroom Stew, Rabbit Stew, Beetroot Soup and Dried Kelp (item tag `cannabis:infusable_foods`). **Anything else does nothing**, and an edible can't be infused twice.
-* An edible keeps its normal food value and gives the strain's **edible dose** when eaten.
+* Every edible gives **twice the plain food's hunger** but only the plain food's **saturation** (a strain's Cookie: twice a cookie's hunger, a cookie's saturation).
+* **Edibles can always be eaten**, even on a full hunger bar. You always get the strain's **edible dose**; hunger and saturation only fill up to Minecraft's normal maximum, so a full player gains nothing extra.
 
 ### Effects
 * **Regeneration, Resistance and Night Vision** at the strain's tier (see the table above), hidden, with no HUD icons.
@@ -118,4 +119,4 @@ Hold **Use** (right-click) for **4 seconds** with a **Flint and Steel** anywhere
 * The ripe crop is taller than one block, so a block directly above it hides its top.
 * Edibles cooked with 1.4.0 keep the plain food look and don't stack with new ones; eat them as usual.
 * Server lag stretches effect times; effects only count down while you are online.
-* Edibles made before 1.7.0 keep the effects they were cooked with (always Tier I strength).
+* Edibles keep the effects they were cooked with: ones made before 1.7.0 are always Tier I strength, and ones made before 1.7.1 keep the old times. Infused foods made before 1.7.2 can't be eaten on a full hunger bar and don't stack with new ones.

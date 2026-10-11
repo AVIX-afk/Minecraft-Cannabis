@@ -2,6 +2,13 @@
 
 All notable changes to the Cannabis mod. Each version must be installed on the server **and** on every client.
 
+## 1.7.2 (2026-10-11)
+
+**Changed**
+- **Edibles can be eaten on a full hunger bar.** You still get the strain's effect; hunger and saturation only fill up to Minecraft's normal maximum, so you gain nothing extra when full.
+- **Every edible gives twice the plain food's hunger**, but only the plain food's saturation. Infused foods used to give the plain food's hunger; a strain's Cookie used to double its saturation too.
+- Infused foods made before this version can't be eaten on a full bar and don't stack with new ones; they still work as normal food.
+
 ## 1.7.1 (2026-10-10)
 
 **Changed**
