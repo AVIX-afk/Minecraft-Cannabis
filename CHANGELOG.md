@@ -2,6 +2,30 @@
 
 All notable changes to the Cannabis mod. Each version must be installed on the server **and** on every client.
 
+## 1.8.0 (2026-10-11)
+
+**Added**
+- **Cross-breeding.** The new **Mixing Table** crosses a seed of one strain with a bud of another strain from the same tier, using a catalyst, into one seed of the next tier. This is the only way to get Tier II and Tier III seeds.
+  - How to craft it, and the catalysts, is in the [player guide](https://github.com/AVIX-afk/Minecraft-Cannabis/blob/main/docs/GUIDE.md#crafting).
+  - When the three items make a cross, a faded seed appears in the result box. Nothing happens until you click it (or the arrow), so you can change your mind first. Click again to stop.
+  - Each cross takes 30 seconds and keeps going while you have inputs and the result slot has room. Changing the inputs to another cross, or running out, stops it until you click again. Server owners can change the time with `mixing_seconds_per_seed` in `config/cannabis.json`.
+  - Either strain can be the seed. Every pair of different strains in a tier makes something: 6 crosses from Tier I to Tier II and 6 from Tier II to Tier III. There are no hints; you have to experiment.
+  - An undiscovered cross shows a faded mystery seed. Taking an input out resets the timer, and nothing is used until a seed is finished.
+  - Hoppers can't put items in or take them out.
+- **Catalysts**, which stack to 64.
+  - **Infernal Catalyst**, made from Nether ingredients, crosses Tier I strains.
+  - **Spectral Catalyst**, an upgraded Infernal Catalyst that glows, crosses Tier II strains.
+- **Research Journal.** The book button on the Mixing Table opens 12 squares, one for each cross. A square unlocks when that table finishes the cross. Hover over it to see the seed and what it needs; click it to fill the table from your inventory (anything you don't carry shows as a faded item in its slot). The journal belongs to its table: break the table and the journal stays with it; a new table starts empty.
+
+**Changed**
+- **Higher tiers last longer per item but you get fewer.** One Canna-Butter now makes 6 edibles at 4:00 for Tier I, 4 at 7:00 for Tier II, and 3 at 10:00 for Tier III (it was 8 of every strain). A concentrate vial now holds 4 dabs at 5:00 for Tier I, 3 at 8:00 for Tier II, and 2 at 12:00 for Tier III (it was 4 of every strain, at twice a joint).
+- Butter you already have keeps the same share of its bucket. A part-used vial keeps the number of dabs it had left; a full one gets its tier's new number.
+- The furnace's flame now drains evenly while each food cooks.
+- The mod's description in the Mods list now describes twelve strains in three tiers (it still named the original three).
+- Tooltips: Buds mention Blunts and the Thai Stick; a strain's Cookie says it can be eaten on a full hunger bar.
+
+The server and every player need the same version, so update together.
+
 ## 1.7.2 (2026-10-11)
 
 **Changed**

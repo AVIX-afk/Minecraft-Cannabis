@@ -19,12 +19,22 @@ Grow twelve strains in three tiers like wheat, then enjoy them the vanilla way: 
 | Tier | Strains | Joint lasts | Effects | How to find it |
 |---|---|---|---|---|
 | I | 🟤 Cocoa Bean Gelato · 🟢 Creeper Crunch · 🟡 Glowstone Gold · 🟠 Magma Cream OG | 3:00 | Regeneration I, Resistance I | Seeds rarely drop from grass; ripe Tier I crops can drop other Tier I seeds |
-| II | 🔵 Lapis OG · 🔴 Nether Wart Punch · 🟣 Enderman Haze · 🩷 Cherry Blossom Kush | 6:00 | Regeneration II, Resistance II | Coming with cross-breeding in a later update |
-| III | 🩵 Ender Dragon Breath · 🔷 Diamond Ore OG · ⚫ Obsidian OG · ⚪ Ghast Gas | 9:00 | Regeneration III, Resistance II | Coming with cross-breeding in a later update |
+| II | 🔵 Lapis OG · 🔴 Nether Wart Punch · 🟣 Enderman Haze · 🩷 Cherry Blossom Kush | 6:00 | Regeneration II, Resistance II | Cross-breeding at a Mixing Table |
+| III | 🩵 Ender Dragon Breath · 🔷 Diamond Ore OG · ⚫ Obsidian OG · ⚪ Ghast Gas | 9:00 | Regeneration III, Resistance II | Cross-breeding at a Mixing Table |
 
 Every strain also gives Night Vision. Higher-tier plants don't drop seeds, just like real high-grade cannabis. Each plant grows through eight real 3D stages to about 1.6 blocks tall, and ripe plants shed tiny drifting flecks so you know when to harvest. Bone meal won't rush them, but bees will.
 
 ![Every growth stage of Creeper Crunch, Enderman Haze and Ghast Gas](docs/images/growth.png)
+
+### Cross-breeding at the Mixing Table
+
+![The Mixing Table, its screen with the Research Journal open, and the two catalysts](docs/images/crossbreeding.png)
+
+Tier II and Tier III seeds don't drop anywhere: you breed them. Load a Mixing Table with a seed of one strain, a bud of another strain from the same tier and a catalyst made from Nether ingredients, then click the faded seed to start. Thirty seconds later you have a seed of the next tier, and the table keeps going while your materials last.
+
+* **Every pair works, but nothing tells you what it makes.** A cross you haven't made shows up as a mystery seed until it's finished. Finding out what each pair makes is up to you.
+* **Two catalysts:** the Infernal Catalyst crosses Tier I strains, and the glowing Spectral Catalyst crosses Tier II strains.
+* **Research Journal:** each table records the crosses it has made. Hover over one to see what it needs, and click it to load the table from your inventory. The journal stays with its table when you break and move it; a new table starts empty.
 
 ### Buds, Cooked Buds and Canna-Butter
 
@@ -43,7 +53,7 @@ Every strain has its own seeds, buds, Cooked Buds and Canna-Butter, shown in the
 
 ![Concentrate vials and Nectar Collectors in every glass colour](docs/images/concentrates.png)
 
-* **Concentrate:** brew a bud onto a Water Bottle to get a golden vial with four dabs. Each dab lasts twice as long as a joint.
+* **Concentrate:** brew a bud onto a Water Bottle to get a golden vial. Higher tiers give fewer but longer dabs: 4 of 5:00, 3 of 8:00 or 2 of 12:00.
 * **Added effect:** brew a full vial again with a potion ingredient, such as Sugar or Blaze Powder, and every dab also gives that potion's effect.
 * **Nectar Collector:** three glass on a diagonal, in any colour.
 
@@ -51,7 +61,7 @@ Every strain has its own seeds, buds, Cooked Buds and Canna-Butter, shown in the
 
 ![Every strain's cookie, Canna-Butter and infused foods](docs/images/edibles.png)
 
-Put Canna-Butter in a furnace's fuel slot and cook ready-to-eat food: bread, steak, pie, stews and more. Each bucket makes eight edibles. Infused food gives twice the plain food's hunger (with its normal saturation), one and a half times a joint's time, and is marked with flecks in the strain's colour. Edibles can be eaten even on a full hunger bar: you still get the effect, and your hunger never goes past full.
+Put Canna-Butter in a furnace's fuel slot and cook ready-to-eat food: bread, steak, pie, stews and more. A bucket makes 6, 4 or 3 edibles by tier, lasting 4:00, 7:00 or 10:00 each. Infused food gives twice the plain food's hunger (with its normal saturation) and is marked with flecks in the strain's colour. Edibles can be eaten even on a full hunger bar: you still get the effect, and your hunger never goes past full.
 
 ### And more
 
