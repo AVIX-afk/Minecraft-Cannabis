@@ -2,6 +2,14 @@
 
 All notable changes to the Cannabis mod. Each version must be installed on the server **and** on every client.
 
+## 1.7.1 (2026-10-10)
+
+**Changed**
+- **Effect time now depends on the tier**, not the strain. Every Tier I strain lasts 3:00 per joint, Tier II 6:00 and Tier III 9:00. Everything else scales with it: a bong hit is a fifth of a joint, an edible one and a half joints, a concentrate dab two joints, and the bong can stack up to 9:00.
+- Edibles made before 1.7.1 keep the time they were cooked with.
+
+The server and every player need the same version, so update together.
+
 ## 1.7.0 (2026-10-10)
 
 **Added**

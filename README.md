@@ -16,11 +16,11 @@ Grow twelve strains in three tiers like wheat, then enjoy them the vanilla way: 
 
 ### Twelve strains in three tiers, grown like wheat
 
-| Tier | Strains (joint time 2:00 / 3:30 / 5:00 / 6:30) | Effects | How to find it |
-|---|---|---|---|
-| I | 🟤 Cocoa Bean Gelato · 🟢 Creeper Crunch · 🟡 Glowstone Gold · 🟠 Magma Cream OG | Regeneration I, Resistance I | Seeds rarely drop from grass; ripe Tier I crops can drop other Tier I seeds |
-| II | 🔵 Lapis OG · 🔴 Nether Wart Punch · 🟣 Enderman Haze · 🩷 Cherry Blossom Kush | Regeneration II, Resistance II | Coming with cross-breeding in a later update |
-| III | 🩵 Ender Dragon Breath · 🔷 Diamond Ore OG · ⚫ Obsidian OG · ⚪ Ghast Gas | Regeneration III, Resistance II | Coming with cross-breeding in a later update |
+| Tier | Strains | Joint lasts | Effects | How to find it |
+|---|---|---|---|---|
+| I | 🟤 Cocoa Bean Gelato · 🟢 Creeper Crunch · 🟡 Glowstone Gold · 🟠 Magma Cream OG | 3:00 | Regeneration I, Resistance I | Seeds rarely drop from grass; ripe Tier I crops can drop other Tier I seeds |
+| II | 🔵 Lapis OG · 🔴 Nether Wart Punch · 🟣 Enderman Haze · 🩷 Cherry Blossom Kush | 6:00 | Regeneration II, Resistance II | Coming with cross-breeding in a later update |
+| III | 🩵 Ender Dragon Breath · 🔷 Diamond Ore OG · ⚫ Obsidian OG · ⚪ Ghast Gas | 9:00 | Regeneration III, Resistance II | Coming with cross-breeding in a later update |
 
 Every strain also gives Night Vision. Higher-tier plants don't drop seeds, just like real high-grade cannabis. Each plant grows through eight real 3D stages to about 1.6 blocks tall, and ripe plants shed tiny drifting flecks so you know when to harvest. Bone meal won't rush them, but bees will.
 

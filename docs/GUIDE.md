@@ -4,22 +4,13 @@ Everything the mod adds and how it works. For installing, see the [README](../RE
 
 ## Strains
 
-Twelve strains in three tiers. In each tier the four strains last 2:00, 3:30, 5:00 and 6:30 per joint; the tier sets how strong the effects are.
+Twelve strains in three tiers. The tier sets both how long the effects last and how strong they are.
 
-| Tier | Strain | Colour | Joint | Bong hit | Edible | Concentrate (per use) |
-|---|---|---|---|---|---|---|
-| I | **Cocoa Bean Gelato** | brown | 2:00 | 0:24 | 3:00 | 4:00 |
-| I | **Creeper Crunch** | green | 3:30 | 0:42 | 5:15 | 7:00 |
-| I | **Glowstone Gold** | yellow | 5:00 | 1:00 | 7:30 | 10:00 |
-| I | **Magma Cream OG** | orange | 6:30 | 1:18 | 9:45 | 13:00 |
-| II | **Lapis OG** | blue | 2:00 | 0:24 | 3:00 | 4:00 |
-| II | **Nether Wart Punch** | red | 3:30 | 0:42 | 5:15 | 7:00 |
-| II | **Enderman Haze** | purple | 5:00 | 1:00 | 7:30 | 10:00 |
-| II | **Cherry Blossom Kush** | pink | 6:30 | 1:18 | 9:45 | 13:00 |
-| III | **Ender Dragon Breath** | magenta | 2:00 | 0:24 | 3:00 | 4:00 |
-| III | **Diamond Ore OG** | cyan | 3:30 | 0:42 | 5:15 | 7:00 |
-| III | **Obsidian OG** | black | 5:00 | 1:00 | 7:30 | 10:00 |
-| III | **Ghast Gas** | white | 6:30 | 1:18 | 9:45 | 13:00 |
+| Tier | Strains | Joint | Bong hit | Edible | Concentrate (per use) |
+|---|---|---|---|---|---|
+| I | **Cocoa Bean Gelato** (brown), **Creeper Crunch** (green), **Glowstone Gold** (yellow), **Magma Cream OG** (orange) | 3:00 | 0:36 | 4:30 | 6:00 |
+| II | **Lapis OG** (blue), **Nether Wart Punch** (red), **Enderman Haze** (purple), **Cherry Blossom Kush** (pink) | 6:00 | 1:12 | 9:00 | 12:00 |
+| III | **Ender Dragon Breath** (magenta), **Diamond Ore OG** (cyan), **Obsidian OG** (black), **Ghast Gas** (white) | 9:00 | 1:48 | 13:30 | 18:00 |
 
 | Tier | Effects (all hidden) |
 |---|---|
@@ -97,7 +88,7 @@ Hold **Use** (right-click) for **4 seconds** with a **Flint and Steel** anywhere
 ### The bong
 * **Fill** an Empty Bong by using it on a water source. **Pack** a Filled Bong with one bud: click the bud onto it in your inventory, or use the bong with buds in your other hand.
 * **Hit** it like a joint (4 seconds, Flint and Steel carried). Each bud gives **5 hits**; one fill lasts **two buds**. The bar under the icon shows hits left.
-* Each hit **adds** a fifth of the strain's joint time, up to **6:30** in total.
+* Each hit **adds** a fifth of the strain's joint time, up to **9:00** in total.
 * Craft it with stained glass for a coloured bong; the colour stays through filling, packing and hits.
 
 ### Concentrate and the Nectar Collector
