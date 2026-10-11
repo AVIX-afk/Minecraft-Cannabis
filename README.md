@@ -24,17 +24,15 @@ Grow twelve strains in three tiers like wheat, then enjoy them the vanilla way: 
 
 Every strain also gives Night Vision. Higher-tier plants don't drop seeds, just like real high-grade cannabis. Each plant grows through eight real 3D stages to about 1.6 blocks tall, and ripe plants shed tiny drifting flecks so you know when to harvest. Bone meal won't rush them, but bees will.
 
-![Three fields of crops](docs/images/three-plots.jpg)
+![Every growth stage of Creeper Crunch, Enderman Haze and Ghast Gas](docs/images/growth.png)
 
 ### Buds, Cooked Buds and Canna-Butter
 
-![Buds, cooked buds and Canna-Butter in the hotbar](docs/images/items-buds-butter.png)
-
-Smelt buds into Cooked Buds and craft them with a Milk Bucket into Canna-Butter.
+Every strain has its own seeds, buds, Cooked Buds and Canna-Butter, shown in the overview at the top. Smelt buds into Cooked Buds and craft them with a Milk Bucket into Canna-Butter.
 
 ### Joints, blunts, Thai Sticks and glass bongs
 
-![Buds, bongs in every glass colour](docs/images/items-bongs.png)
+![Joints, blunts, the Thai Stick and bongs in every glass colour](docs/images/smoking.png)
 
 * **Joints:** one bud and a Rolling Paper. Hold use for four seconds with a Flint and Steel in your inventory.
 * **Blunts:** three Leaf Litter make a Blunt Wrap; add a bud and smoke it like a joint.
@@ -43,7 +41,7 @@ Smelt buds into Cooked Buds and craft them with a Milk Bucket into Canna-Butter.
 
 ### Concentrates and the Nectar Collector
 
-![Concentrate vials and Nectar Collectors](docs/images/items-concentrates-collectors.png)
+![Concentrate vials and Nectar Collectors in every glass colour](docs/images/concentrates.png)
 
 * **Concentrate:** brew a bud onto a Water Bottle to get a golden vial with four dabs. Each dab lasts twice as long as a joint.
 * **Added effect:** brew a full vial again with a potion ingredient, such as Sugar or Blaze Powder, and every dab also gives that potion's effect.
@@ -51,7 +49,7 @@ Smelt buds into Cooked Buds and craft them with a Milk Bucket into Canna-Butter.
 
 ### Edibles
 
-![Edible versions of vanilla foods](docs/images/infused-foods.png)
+![Every strain's cookie, Canna-Butter and infused foods](docs/images/edibles.png)
 
 Put Canna-Butter in a furnace's fuel slot and cook ready-to-eat food: bread, steak, pie, stews and more. Each bucket makes eight edibles. Infused food keeps its hunger value, gives one and a half times a joint's time, and is marked with flecks in the strain's colour.
 

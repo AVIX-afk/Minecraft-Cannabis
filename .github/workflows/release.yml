@@ -9,6 +9,8 @@
 #   4. checks the updater points at this repository and packages it
 #   5. creates the tag vX.Y.Z and the release, with the changelog section as its notes and the jar,
 #      its .sig, cannabis-updater.zip and SHA256SUMS.txt (checksums of the jar and the zip) attached
+#   6. once the new release is up, removes every older release and its tag, so the Releases page
+#      only ever offers the current version
 # It can also be started by hand from the Actions tab ("Run workflow").
 name: Release
 
@@ -116,3 +118,18 @@ jobs:
             SHA256SUMS.txt
           make_latest: true
           fail_on_unmatched_files: true
+
+      # Players should only ever find the current version. Runs only after the new release was
+      # published (any earlier failure stops the job), and checks it exists before removing anything.
+      - name: Remove older releases
+        if: env.SKIP != '1'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh api "repos/$GITHUB_REPOSITORY/releases/tags/v$VERSION" --jq .id > /dev/null
+          gh api "repos/$GITHUB_REPOSITORY/releases" --paginate --jq ".[] | select(.tag_name != \"v$VERSION\") | \"\(.id) \(.tag_name)\"" |
+          while read -r id tag; do
+            echo "Removing release $tag"
+            gh api -X DELETE "repos/$GITHUB_REPOSITORY/releases/$id"
+            gh api -X DELETE "repos/$GITHUB_REPOSITORY/git/refs/tags/$tag" || echo "::warning::tag $tag was not removed"
+          done
