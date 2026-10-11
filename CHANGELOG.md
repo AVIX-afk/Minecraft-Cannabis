@@ -2,6 +2,25 @@
 
 All notable changes to the Cannabis mod. Each version must be installed on the server **and** on every client.
 
+## 1.7.0 (2026-10-10)
+
+**Added**
+- **Twelve strains in three tiers.** Tier I: Cocoa Bean Gelato, Creeper Crunch, Glowstone Gold, Magma Cream OG. Tier II: Lapis OG, Nether Wart Punch, Enderman Haze, Cherry Blossom Kush. Tier III: Ender Dragon Breath, Diamond Ore OG, Obsidian OG, Ghast Gas. In each tier the strains last 2:00, 3:30, 5:00 and 6:30.
+- **Stronger tiers.** Tier II gives Regeneration II and Resistance II; Tier III gives Regeneration III and Resistance II.
+- **Blunts.** Three Leaf Litter in a row make a Blunt Wrap; a Blunt Wrap and a bud make a Blunt, smoked like a joint.
+- **Thai Stick.** Three Bamboo and six String make a Thai Stick. Surround it with 8 buds of one tier in a crafting table to pack it, then take 8 hits, one bud each. It never stacks.
+- A second creative tab, **Cannabis Edibles**.
+
+**Changed**
+- Hemp is now **Creeper Crunch** (3:30). Kush is now **Enderman Haze** and Glue is now **Lapis OG**, both Tier II. Your items and crops carry over.
+- Seeds: every Tier I seed drops from grass. Harvesting a Tier I crop can also drop another Tier I seed. Tier II and III crops never drop seeds; they will come from cross-breeding in a later update.
+- The Wandering Trader buys one random strain of each tier: 1, 2 or 3 emeralds per bud.
+- The bong can stack hits up to 6:30 (was 5:00).
+- **Shorter names.** Food, butter and other items no longer repeat what they are: *Creeper Crunch Cookie*, *Creeper Crunch Butter*, *Creeper Crunch Cooked Salmon*. The tooltip shows the tier, and "Edible · Tier I" on food. Joints and Blunts keep the word in their name.
+- Edibles made before 1.7.0 keep the effects they were cooked with.
+
+The server and every player need the same version, so update together.
+
 ## 1.6.0 (2026-10-10)
 
 **Added**

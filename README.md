@@ -2,9 +2,9 @@
 
 **Grow it, roll it, cook it.** A vanilla-style cannabis farming mod for Minecraft Java Edition (Fabric).
 
-![Three fields of Hemp, Kush and Glue](docs/images/three-plots.jpg)
+![All twelve strains: crops and items, by tier](docs/images/strains.png)
 
-Grow three strains like wheat, then enjoy them the vanilla way: roll joints, pack glass bongs, brew golden concentrates and dab them with a Nectar Collector, or cook edibles in a furnace with Canna-Butter. Every hit gives a gentle buff, a subtle vignette and soft smoke that other players can see. Everything is made to look and feel like it shipped with the game.
+Grow twelve strains in three tiers like wheat, then enjoy them the vanilla way: roll joints and blunts, pack a Thai Stick or a glass bong, brew golden concentrates and dab them with a Nectar Collector, or cook edibles in a furnace with Canna-Butter. Every hit gives a gentle buff, a subtle vignette and soft smoke that other players can see. Everything is made to look and feel like it shipped with the game.
 
 **[⬇ Download the latest release](../../releases/latest)** · [Player guide](docs/GUIDE.md) · [Changelog](CHANGELOG.md)
 
@@ -14,21 +14,17 @@ Grow three strains like wheat, then enjoy them the vanilla way: roll joints, pac
 
 ## Features
 
-### Three strains, grown like wheat
+### Twelve strains in three tiers, grown like wheat
 
-| | Strain | Joint lasts | How to find it |
+| Tier | Strains (joint time 2:00 / 3:30 / 5:00 / 6:30) | Effects | How to find it |
 |---|---|---|---|
-| 🟢 | **Hemp** | 2:00 | Seeds rarely drop from grass |
-| 🟣 | **Kush** | 3:30 | A rare bonus seed from any ripe harvest |
-| 🔵 | **Glue** | 5:00 | An even rarer bonus seed |
+| I | 🟤 Cocoa Bean Gelato · 🟢 Creeper Crunch · 🟡 Glowstone Gold · 🟠 Magma Cream OG | Regeneration I, Resistance I | Seeds rarely drop from grass; ripe Tier I crops can drop other Tier I seeds |
+| II | 🔵 Lapis OG · 🔴 Nether Wart Punch · 🟣 Enderman Haze · 🩷 Cherry Blossom Kush | Regeneration II, Resistance II | Coming with cross-breeding in a later update |
+| III | 🩵 Ender Dragon Breath · 🔷 Diamond Ore OG · ⚫ Obsidian OG · ⚪ Ghast Gas | Regeneration III, Resistance II | Coming with cross-breeding in a later update |
 
-Each plant grows through eight real 3D stages to about 1.6 blocks tall, and ripe plants shed tiny drifting flecks so you know when to harvest. Bone meal won't rush them, but bees will.
+Every strain also gives Night Vision. Higher-tier plants don't drop seeds, just like real high-grade cannabis. Each plant grows through eight real 3D stages to about 1.6 blocks tall, and ripe plants shed tiny drifting flecks so you know when to harvest. Bone meal won't rush them, but bees will.
 
-<p>
-  <img src="docs/images/field-hemp.jpg" alt="Hemp field" width="32%">
-  <img src="docs/images/field-kush.jpg" alt="Kush field" width="32%">
-  <img src="docs/images/field-glue.jpg" alt="Glue field" width="32%">
-</p>
+![Three fields of crops](docs/images/three-plots.jpg)
 
 ### Buds, Cooked Buds and Canna-Butter
 
@@ -36,11 +32,13 @@ Each plant grows through eight real 3D stages to about 1.6 blocks tall, and ripe
 
 Smelt buds into Cooked Buds and craft them with a Milk Bucket into Canna-Butter.
 
-### Joints and glass bongs
+### Joints, blunts, Thai Sticks and glass bongs
 
 ![Buds, bongs in every glass colour](docs/images/items-bongs.png)
 
 * **Joints:** one bud and a Rolling Paper. Hold use for four seconds with a Flint and Steel in your inventory.
+* **Blunts:** three Leaf Litter make a Blunt Wrap; add a bud and smoke it like a joint.
+* **Thai Stick:** bamboo and string make the stick. Surround it with 8 buds of one tier in a crafting table, then take 8 hits, one bud each.
 * **Bongs:** seven glass around a bowl, in clear glass or any of the 16 stained-glass colours. Fill one at a water source, pack it with a bud, and take five hits per bud. Other players see you hold it by the neck and hit it from the mouthpiece.
 
 ### Concentrates and the Nectar Collector
@@ -63,7 +61,8 @@ Put Canna-Butter in a furnace's fuel slot and cook ready-to-eat food: bread, ste
   * A subtle vignette eases in and out.
   * Night Vision fades out smoothly instead of strobing.
 * **Smoke and sound:** a haze of smoke and an exhale plume, plus a lighter click, crackle, bubbling, inhale and exhale. All the sounds are Minecraft's own.
-* **Selling buds:** Wandering Traders buy buds for emeralds.
+* **Selling buds:** each Wandering Trader buys one strain of every tier for 1, 2 or 3 emeralds.
+* **Two creative tabs:** Cannabis, and Cannabis Edibles for every infused food.
 * **Server-friendly:** everything runs on the server, and the mod sends no custom network packets. Seed rarity is configurable.
 * **Update notices:** when a new version is out, the game tells you on start-up. It only reads the newest version number from this page and never downloads anything itself.
 
