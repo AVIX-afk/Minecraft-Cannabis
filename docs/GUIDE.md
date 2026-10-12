@@ -29,6 +29,9 @@ The bonus-seed chances are set in `config/cannabis.json` on the server (`cocoa_s
 ### Update notices
 When the game or server starts, the mod asks GitHub for the newest version number. If there's a newer version, a notice pops up on the title screen and in chat when you join a world, and the server console says so. To update, close Minecraft (or stop the server) and run `update-cannabis.bat` from the updater zip. The mod itself never downloads anything. To turn the notices off, set `"check_for_updates": false` in that game's or server's `config/cannabis.json`.
 
+### Joining a server
+The server and every player must run the same Cannabis version. When you join, the server asks your game which version it has; if it's different, or the mod is missing, you're turned away before you reach the world, with a message saying which version to get. Update with the updater or the [latest release](https://github.com/afkbirdgames/Minecraft-Cannabis/releases/latest), then join again. Server owners can turn the check off with `"require_same_version_to_join": false` in the server's `config/cannabis.json`.
+
 ---
 
 ## Items

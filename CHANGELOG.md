@@ -2,6 +2,13 @@
 
 All notable changes to the Cannabis mod. Each version must be installed on the server **and** on every client.
 
+## 1.8.2 (2026-10-12)
+
+**Added**
+- **Servers turn away mismatched versions.** When you join a server, it now checks that your game has the same Cannabis version as the server. If it doesn't, or you don't have the mod, you're stopped before you reach the world with a message saying which version to get. Different versions can disagree about items, recipes and crops, so this keeps worlds safe.
+  - Players on 1.8.1 or older can't join a 1.8.2 server: everyone updates together, as always.
+  - Server owners can turn the check off with `"require_same_version_to_join": false` in `config/cannabis.json`.
+
 ## 1.8.1 (2026-10-12)
 
 **Changed**

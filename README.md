@@ -94,7 +94,7 @@ The full rules, numbers and recipes are in the **[player guide](docs/GUIDE.md)**
 
 **Official downloads only come from this page's [Releases](../../releases).** Each release lists SHA-256 checksums in `SHA256SUMS.txt`, and every jar comes with the author's signature (`.sig`); see [SECURITY.md](SECURITY.md).
 
-**Multiplayer:** the mod is required on the server **and** on every player's game, and everyone must run the same version. Worlds, items and planted crops carry over between versions.
+**Multiplayer:** the mod is required on the server **and** on every player's game, and everyone must run the same version. The server checks this when you join and turns away a different version, with a message saying which one to get. Worlds, items and planted crops carry over between versions.
 
 ### Staying up to date (Windows)
 
