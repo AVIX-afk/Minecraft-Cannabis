@@ -6,7 +6,7 @@
 
 Grow twelve strains in three tiers like wheat, then enjoy them the vanilla way: roll joints and blunts, pack a Thai Stick or a glass bong, brew golden concentrates and dab them with a Nectar Collector, or cook edibles in a furnace with Canna-Butter. Every hit gives a gentle buff, a subtle vignette and soft smoke that other players can see. Everything is made to look and feel like it shipped with the game.
 
-**[⬇ Download the latest release](../../releases/latest)** · [Player guide](docs/GUIDE.md) · [Changelog](CHANGELOG.md)
+**[⬇ Download the latest release](../../releases/latest)** · [Player guide](docs/GUIDE.md) · [Changelog](CHANGELOG.md) · [afkbird.com](https://afkbird.com/projects/cannabis/)
 
 > This mod is a fictional game mechanic made for adult players. It does not endorse or encourage real-world drug use.
 
@@ -112,7 +112,7 @@ Every release includes **`cannabis-updater.zip`**. Unzip it anywhere and double-
 
 ## Help and feedback
 
-Found a bug or have an idea? [Open an issue](../../issues/new/choose). Include your mod version, and the game log if something crashed. Security problems: please report them privately ([SECURITY.md](SECURITY.md)).
+Found a bug or have an idea? [Open an issue](../../issues/new/choose), or ask in #mod-help on the [afkbird Discord](https://afkbird.com/discord). Include your mod version, and the game log if something crashed. Security problems: please report them privately ([SECURITY.md](SECURITY.md)).
 
 ## License
 
@@ -120,6 +120,6 @@ Found a bug or have an idea? [Open an issue](../../issues/new/choose). Include y
 
 ## Credits
 
-Made by [AVIX-afk](https://github.com/AVIX-afk). All textures are original pixel art. Edibles and Canna-Butter draw an overlay on Minecraft's own sprites at runtime, and the sounds are Minecraft's own. No Mojang assets are included.
+Made by [afkbird](https://afkbird.com), the studio of [AVIX-afk](https://github.com/AVIX-afk). All textures are original pixel art. Edibles and Canna-Butter draw an overlay on Minecraft's own sprites at runtime, and the sounds are Minecraft's own. No Mojang assets are included.
 
 *Not an official Minecraft product. Not approved by or associated with Mojang or Microsoft.*

@@ -30,7 +30,7 @@ concurrency:
 jobs:
   release:
     # Only the official repository publishes releases (not forks or copies).
-    if: github.repository == 'AVIX-afk/Minecraft-Cannabis'
+    if: github.repository == 'afkbirdgames/Minecraft-Cannabis'
     runs-on: ubuntu-latest
     permissions:
       contents: write

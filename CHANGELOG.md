@@ -6,7 +6,7 @@ All notable changes to the Cannabis mod. Each version must be installed on the s
 
 **Added**
 - **Cross-breeding.** The new **Mixing Table** crosses a seed of one strain with a bud of another strain from the same tier, using a catalyst, into one seed of the next tier. This is the only way to get Tier II and Tier III seeds.
-  - How to craft it, and the catalysts, is in the [player guide](https://github.com/AVIX-afk/Minecraft-Cannabis/blob/main/docs/GUIDE.md#crafting).
+  - How to craft it, and the catalysts, is in the [player guide](https://github.com/afkbirdgames/Minecraft-Cannabis/blob/main/docs/GUIDE.md#crafting).
   - When the three items make a cross, a faded seed appears in the result box. Nothing happens until you click it (or the arrow), so you can change your mind first. Click again to stop.
   - Each cross takes 30 seconds and keeps going while you have inputs and the result slot has room. Changing the inputs to another cross, or running out, stops it until you click again. Server owners can change the time with `mixing_seconds_per_seed` in `config/cannabis.json`.
   - Either strain can be the seed. Every pair of different strains in a tier makes something: 6 crosses from Tier I to Tier II and 6 from Tier II to Tier III. There are no hints; you have to experiment.

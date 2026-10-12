@@ -29,7 +29,7 @@ param(
 
 # --------------------------------------------------------------------------- settings
 # The GitHub repository the mod is published from: "owner/name".
-$Repo = "AVIX-afk/Minecraft-Cannabis"
+$Repo = "afkbirdgames/Minecraft-Cannabis"
 # The author's public signing key (RSA, SHA-256). Releases are signed with the matching private key.
 $SigningKeyModulus = "q1Cd+setSeeR3RC8iNKtueJjb/ReYoNqW5+7D5MTrHJJn54XH//XnPo27/jcb1Wp54vT9kKinHdxjfN4+tXzVLiQ6/82J2ICfu6NSD6LI4+XnstkMIp85YNNUUkhwj7jkJ6JgbOR5QDGcPXjLtJNC++8RqnQC0WarvHq2ozpNBmPuD6hFgDA0yRCxSTJLE0wocFI6K7byIc6eIVAlFoeUGcpSOA6HqL/Sr7MRuItYHU2Ws9Uc78bzltR7cBBGsLJLktHT2IRbexpfHaQ5SBHyPi8iCsCBu/Q6yCiVwEoK/qpIBYeE6+ijKU3xO7GjYogYM0qAKvvzMgSj5AWpc9UME22S7tAmu44YgSFz4mAvCjVy4uUFkZ/TpDkO165Qs2QCrqUNuZMfWGFCY7tBxwSBSqYChh0VlDijA+7a3BOgp/Sjv9Cu6X8etsM75V18+J7OngrE8h3NG6NMk640K8DZ8R5uIWXP5jyifcQ2VfKAZpfyZYIjNnVgdXtlP5A01EJ"
 $SigningKeyExponent = "AQAB"

@@ -2,7 +2,7 @@
 
 ## Official downloads
 
-The Cannabis mod is only published on this repository's [Releases page](https://github.com/AVIX-afk/Minecraft-Cannabis/releases). Copies on other sites, or sent to you by someone else, aren't official and may have been tampered with.
+The Cannabis mod is only published on this repository's [Releases page](https://github.com/afkbirdgames/Minecraft-Cannabis/releases). Copies on other sites, or sent to you by someone else, aren't official and may have been tampered with.
 
 Each release includes `SHA256SUMS.txt`. To check a download on Windows, open PowerShell in the download folder and run:
 
