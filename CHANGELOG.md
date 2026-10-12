@@ -2,6 +2,12 @@
 
 All notable changes to the Cannabis mod. Each version must be installed on the server **and** on every client.
 
+## 1.8.1 (2026-10-12)
+
+**Changed**
+- **New home.** Cannabis is now published by [afkbird](https://afkbird.com). The in-game update notice, the mod's links and the updater now point to [github.com/afkbirdgames/Minecraft-Cannabis](https://github.com/afkbirdgames/Minecraft-Cannabis). Old links keep working and redirect there.
+- Nothing else changed: worlds, items and settings carry over. Update the server and every player together, as always.
+
 ## 1.8.0 (2026-10-11)
 
 **Added**
